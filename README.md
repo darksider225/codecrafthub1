@@ -1,6 +1,3 @@
-Here’s an updated **README.md** that matches your current `app.py` (including the new `/api/courses/stats` endpoint):
-
-```markdown
 # CodeCraftHub
 
 ## Project Overview
