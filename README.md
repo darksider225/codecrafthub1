@@ -1,164 +1,259 @@
 # CodeCraftHub
 
 ## Project Overview
-**CodeCraftHub** is a simple personalized learning platform designed to help developers track the courses they want to learn. Built with the Flask framework, this RESTful API allows users to manage their courses with ease. It uses a JSON file for data storage, making it lightweight and easy to set up. This project serves as a practical introduction to building REST APIs using Python.
+
+**CodeCraftHub** is a personal learning goal tracker that helps users organize and monitor the courses they want to complete. The application combines a **Flask REST API backend** with a **responsive web interface**, allowing users to manage their learning journey without interacting directly with API tools.
+
+Users can add new courses, update their progress, track completion goals, and view all planned learning activities in one place. Course data is stored in a JSON file, making the project lightweight and easy to set up for educational purposes.
+
+---
 
 ## Features
-- Create a new course with name, description, target completion date, status, and creation timestamp.
-- Retrieve all courses or a specific course by ID.
-- Update course details based on user input.
-- Delete courses that are no longer needed.
-- Get statistics about total courses and their distribution by status.
-- Error handling for common issues such as missing fields and invalid input.
+
+### Frontend Features
+
+* Add new courses using an intuitive web form.
+* Provide the following course details:
+
+  * Course name
+  * Course description
+  * Target completion date
+  * Learning status
+* Clear form inputs with a single click.
+* View all saved courses in a dedicated courses section.
+* Display the total number of tracked courses.
+* Show loading and empty states while retrieving data from the API.
+
+### Backend Features
+
+* Create new courses through REST API endpoints.
+* Retrieve all courses or a specific course by ID.
+* Update existing course information.
+* Delete courses that are no longer relevant.
+* Generate statistics about learning progress.
+* Store data persistently using a JSON file.
+* Validate required fields and handle common errors gracefully.
+
+---
+
+## Technologies Used
+
+### Backend
+
+* Python 3
+* Flask
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+
+### Data Storage
+
+* JSON
+
+---
 
 ## Installation Instructions
 
 ### Step 1: Prerequisites
-- Make sure you have Python 3.x installed on your machine. You can download it from [python.org](https://www.python.org/downloads/).
-- You'll also need `pip`, which is included with Python 3.x installations.
+
+Ensure you have the following installed:
+
+* Python 3.x
+* pip (included with most Python installations)
+
+Download Python from:
+[https://www.python.org/downloads/](https://www.python.org/downloads/)
+
+---
 
 ### Step 2: Clone the Repository
+
 ```bash
 git clone https://github.com/yourusername/CodeCraftHub.git
 cd CodeCraftHub
 ```
-*(Replace `yourusername` with the actual username of the GitHub repository if applicable.)*
 
-### Step 3: Create a Virtual Environment (optional but recommended)
-```bash
-python -m venv venv
-source venv/bin/activate  # On macOS or Linux
-venv\Scripts\activate     # On Windows
-```
-
-### Step 4: Install Dependencies
-```bash
-pip install Flask
-```
-
-## How to Run the Application
-Ensure you're in the project directory.  
-Run the application by executing:
-```bash
-python app.py
-```
-The server will start on `http://127.0.0.1:5000`. You should see output indicating that the Flask development server is running.
+Replace `yourusername` with the actual GitHub username if applicable.
 
 ---
 
-## API Endpoints Documentation
+### Step 3: Create a Virtual Environment (Optional)
 
-### 1. Create a New Course
-**Endpoint:**  
-`POST /api/courses`
+```bash
+python -m venv venv
+```
 
-**Request Body:**
+Activate the environment:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**macOS/Linux**
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+### Step 4: Install Dependencies
+
+```bash
+pip install Flask Flask-Cors
+```
+
+If a `requirements.txt` file exists, install dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Running the Application
+
+Start the Flask server:
+
+```bash
+python app.py
+```
+
+The application will run locally at:
+
+```text
+http://127.0.0.1:5000
+```
+
+Open this address in your browser to access the CodeCraftHub interface.
+
+---
+
+## Using the Application
+
+### Adding a Course
+
+Complete the **Add New Course** form by entering:
+
+* Course Name
+* Target Date
+* Status:
+
+  * Not Started
+  * In Progress
+  * Completed
+* Course Description
+
+Click **Add Course** to save the course.
+
+Use **Clear Form** to reset all fields.
+
+---
+
+### Viewing Courses
+
+The **Courses** section displays all tracked learning goals.
+
+For each course, users can view information such as:
+
+* Course name
+* Description
+* Target completion date
+* Current status
+
+The interface also displays the total number of courses currently being tracked.
+
+---
+
+## API Documentation
+
+### Create a Course
+
+**POST**
+
+```text
+/api/courses
+```
+
+**Request Body**
+
 ```json
 {
     "name": "Learn Python",
     "description": "A comprehensive Python course",
-    "target_date": "2023-12-31",
+    "target_date": "2026-07-31",
     "status": "Not Started"
 }
 ```
 
-**Response Example:**
-```json
-{
-    "id": 1,
-    "name": "Learn Python",
-    "description": "A comprehensive Python course",
-    "target_date": "2023-12-31",
-    "status": "Not Started",
-    "created_at": "2023-10-06T12:34:56.789012"
-}
+---
+
+### Get All Courses
+
+**GET**
+
+```text
+/api/courses
 ```
 
 ---
 
-### 2. Get All Courses
-**Endpoint:**  
-`GET /api/courses`
+### Get a Course by ID
 
-**Response Example:**
-```json
-[
-    {
-        "id": 1,
-        "name": "Learn Python",
-        "description": "A comprehensive Python course",
-        "target_date": "2023-12-31",
-        "status": "Not Started",
-        "created_at": "2023-10-06T12:34:56.789012"
-    }
-]
+**GET**
+
+```text
+/api/courses/<id>
 ```
 
 ---
 
-### 3. Get a Specific Course
-**Endpoint:**  
-`GET /api/courses/<id>`
+### Update a Course
 
-**Response Example:**
-```json
-{
-    "id": 1,
-    "name": "Learn Python",
-    "description": "A comprehensive Python course",
-    "target_date": "2023-12-31",
-    "status": "Not Started",
-    "created_at": "2023-10-06T12:34:56.789012"
-}
+**PUT**
+
+```text
+/api/courses/<id>
 ```
 
----
+**Request Body**
 
-### 4. Update a Course
-**Endpoint:**  
-`PUT /api/courses/<id>`
-
-**Request Body:**
 ```json
 {
-    "name": "Learn Python Advanced",
-    "description": "An advanced Python course",
-    "target_date": "2024-01-15",
-    "status": "In Progress"
-}
-```
-
-**Response Example:**
-```json
-{
-    "id": 1,
-    "name": "Learn Python Advanced",
-    "description": "An advanced Python course",
-    "target_date": "2024-01-15",
+    "name": "Advanced Python",
+    "description": "Continue learning advanced concepts",
+    "target_date": "2026-08-15",
     "status": "In Progress"
 }
 ```
 
 ---
 
-### 5. Delete a Course
-**Endpoint:**  
-`DELETE /api/courses/<id>`
+### Delete a Course
 
-**Response Example:**
-```json
-{
-    "result": true
-}
+**DELETE**
+
+```text
+/api/courses/<id>
 ```
 
 ---
 
-### 6. Get Course Statistics
-**Endpoint:**  
-`GET /api/courses/stats`
+### Get Course Statistics
 
-**Response Example:**
+**GET**
+
+```text
+/api/courses/stats
+```
+
+**Example Response**
+
 ```json
 {
     "total_courses": 3,
@@ -172,26 +267,62 @@ The server will start on `http://127.0.0.1:5000`. You should see output indicati
 
 ---
 
-## Testing Instructions
-You can test the API using **curl** or tools like **Postman**.
+## Example API Testing
 
-### Example curl commands:
+### Create a Course
 
-**Create a new course:**
 ```bash
 curl -X POST http://127.0.0.1:5000/api/courses \
 -H "Content-Type: application/json" \
--d '{"name": "Learn Python", "description": "A comprehensive Python course", "target_date": "2023-12-31", "status": "Not Started"}'
+-d '{"name":"Learn Python","description":"A comprehensive Python course","target_date":"2026-07-31","status":"Not Started"}'
 ```
 
-**Get all courses:**
+---
+
+### Retrieve All Courses
+
 ```bash
 curl -X GET http://127.0.0.1:5000/api/courses
 ```
 
-**Get course statistics:**
+---
+
+### Retrieve Statistics
+
 ```bash
 curl -X GET http://127.0.0.1:5000/api/courses/stats
 ```
 
 ---
+
+## Project Structure
+
+```text
+CodeCraftHub/
+│
+├── app.py               # Flask application
+├── courses.json         # JSON data storage
+├── templates/
+│   └── index.html       # Frontend interface
+├── static/
+│   ├── styles.css       # Application styling
+│   └── script.js        # Frontend logic
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Future Improvements
+
+* Search and filter courses.
+* Sort courses by target date or status.
+* Add authentication and user accounts.
+* Migrate from JSON storage to a relational database.
+* Introduce dashboards and visual progress indicators.
+
+---
+
+## License
+
+This project is intended for educational and learning purposes.

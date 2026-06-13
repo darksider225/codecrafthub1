@@ -2,8 +2,11 @@ from flask import Flask, jsonify, request, abort
 import json
 from datetime import datetime
 import os
+from flask_cors import CORS
+
 
 app = Flask(__name__)  # Create a Flask application
+CORS(app)  # enables CORS for all routes
 
 # Function to load courses from the JSON file
 def load_courses():
